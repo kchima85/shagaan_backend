@@ -1,7 +1,7 @@
 select
   user_id
 from
-  users
+  shagaan.users
 where
   google_id = $1
 or 

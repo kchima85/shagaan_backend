@@ -1,6 +1,6 @@
 select
   *
 from
-  users
+  shagaan.users
 where
   user_id = $1;

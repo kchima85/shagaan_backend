@@ -4,15 +4,16 @@ services:
     build:
       dockerfile: Dockerfile-db
       context: './docker'
-    restart: always
     volumes:
       - ./data/db:/var/lib/postgresql/data
     ports:
-      - 54325:5432
+      - 5432:5432
     environment:
-      POSTGRES_DB: shagaan_backend
+    - POSTGRES_USER=shagaan_user
+    - POSTGRES_DB=shagaan_db
 
   node-app:
+    restart: always
     build: .
     ports: 
-      - "8080:8080"
+      - "3000:3000"

@@ -1,11 +1,11 @@
 const passport = require('passport');
 const Facebook = require('passport-facebook').Strategy;
 const Google = require('passport-google-oauth20');
-const { facebook } = require('../../config/config');
-const { google } = require('../../config/config');
+const uuid = require('uuid');
+const { facebook } = require('../../config/config.js');
+const { google } = require('../../config/config.js');
 const pool = require('../../tools/pgConnect');
 const fileReader = require('../../tools/fileReader')('./routers/auth/queries/');
-const uuid = require('uuid');
 
 passport.serializeUser((user, done) => done(null, user.user_id));
 
@@ -29,14 +29,21 @@ passport.use(new Facebook({
   profileFields: ['id', 'name', 'email'],
   enableProof: true,
 }, async (accessToken, refreshToken, profile, done) => {
-  const userId = await pool.query(fileReader.check_third_party_id, [profile.id]);
-  if (userId.rows.length > 0) {
-    return done(null, userId.rows[0]);
+  try {
+    const userId = await pool.query(fileReader.check_third_party_id, [profile.id]);
+    if (userId.rows.length > 0) {
+      return done(null, userId.rows[0]);
+    }
+  } catch (error) {
+    console.log(error);
   }
+
+  const email = profile.emails || null;
+
   return pool.query(fileReader.create_user_facebook, [
     profile.name.givenName,
     profile.name.familyName,
-    profile.emails[0].value,
+    email,
     uuid(),
     profile.id,
   ])
@@ -50,9 +57,13 @@ passport.use(new Google({
   clientID: google.clientId,
   clientSecret: google.clientSecret,
 }, async (accessToken, refreshToken, profile, done) => {
-  const userId = await pool.query(fileReader.check_third_party_id, [profile.id]);
-  if (userId.rows.length > 0) {
-    return done(null, userId.rows[0]);
+  try {
+    const userId = await pool.query(fileReader.check_third_party_id, [profile.id]);
+    if (userId.rows.length > 0) {
+      return done(null, userId.rows[0]);
+    }
+  } catch (error) {
+    console.log(error);
   }
   return pool.query(fileReader.create_user_google, [
     profile.name.givenName,

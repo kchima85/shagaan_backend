@@ -1,9 +1,8 @@
 set -e
 
-psql -v ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
-  CREATE USER shagaan_backend;
-  GRANT ALL PRIVILEGES ON DATABASE shagaan_backend to shagaan_backend;
-  CREATE SCHEMA IF NOT EXISTS shagaan AUTHORIZATION shagaan_backend;
+psql -v ERROR_STOP=1 --username=shagaan_user dbname=shagaan_db <<-EOSQL
+  CREATE SCHEMA shagaan;
+  GRANT ALL PRIVILEGES ON DATABASE shagaan_db TO shagaan_user;
   CREATE TABLE IF NOT EXISTS shagaan.users (
     user_id uuid PRIMARY KEY,
     google_id varchar(255),
@@ -13,6 +12,6 @@ psql -v ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     email varchar(40),
     phone_number varchar(40),
     created_at timestamp,
-    archive boolean
+    archived boolean
   )
 EOSQL

@@ -32,7 +32,7 @@ router.get('/google', passport.authenticate('google', {
 // auth google callback
 router.get('/google/redirect', passport.authenticate('google'), async (req, res, next) => {
   try {
-    res.redirect('/dashboard');
+    res.redirect('http://localhost:8080/dashboard');
   } catch (err) {
     console.error(err);
     next(err);
@@ -45,7 +45,7 @@ router.get('/facebook', passport.authenticate('facebook'));
 // auth facebook callback
 router.get('/facebook/redirect', passport.authenticate('facebook'), async (req, res, next) => {
   try {
-    res.redirect('/dashboard');
+    res.redirect('http://localhost:8080/dashboard');
   } catch (err) {
     console.error(err);
     next(err);
