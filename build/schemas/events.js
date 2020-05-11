@@ -1,0 +1,15 @@
+module.exports = {
+  event_id: 'uuid PRIMARY KEY',
+  created_by: 'uuid',
+  name_of_event: 'varchar(40) NOT NULL',
+  date: 'date NOT NULL',
+  address: 'varchar(255) NOT NULL',
+  start_time: 'time with time zone NOT NULL',
+  end_time: 'time with time zone NOT NULL',
+  created_at: 'timestamp with time zone',
+  last_updated: 'timestamp with time zone',
+  archived: 'boolean',
+  completed: 'boolean',
+  state: 'varchar(255)',
+  city: 'varchar(255) NOT NULL',
+};
