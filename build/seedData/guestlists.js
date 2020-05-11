@@ -1,0 +1,32 @@
+module.exports = {
+  dataOne: {
+    guest_list_id: '9813946f-5a42-4656-bc19-e87044132d2c',
+    event_id: '334c1ae1-f348-4aaf-acf8-fdb1ee9cab72',
+    guest_list_name: "KC''s bday",
+    created_by: '8660c554-f9f3-45ea-a42f-881e8d20af4e',
+    created_at: 'now()',
+    last_updated: 'now()',
+    num_of_guests: 5,
+    archived: 'false',
+  },
+  dataTwo: {
+    guest_list_id: 'b4b318fe-448b-441f-ac62-6630b6dfa484',
+    event_id: '862c71df-adf1-4076-b53e-feecb08d8f75',
+    guest_list_name: "KC''s wedding",
+    created_by: 'c5ae16a5-60d1-4013-a6ec-dd47b7b180cd',
+    created_at: 'now()',
+    last_updated: 'now()',
+    num_of_guests: 5,
+    archived: 'false',
+  },
+  dataThree: {
+    guest_list_id: 'd45eb834-b441-4c53-8067-e337a04a9270',
+    event_id: 'ac56021e-656b-40e3-aa3e-c9ed4a5d29d3',
+    guest_list_name: "KC''s jaago",
+    created_by: '86c4da7c-71f6-4c40-82af-43a6fe25a247',
+    created_at: 'now()',
+    last_updated: 'now()',
+    num_of_guests: 5,
+    archived: 'false',
+  },
+};

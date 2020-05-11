@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    build:
+      dockerfile: Dockerfile-db
+      context: './docker'
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+    - POSTGRES_USER=shagaan_user
+    - POSTGRES_DB=shagaan_db
+
+  node-app:
+    restart: always
+    build: .
+    ports: 
+      - "3000:3000"
